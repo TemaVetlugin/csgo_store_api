@@ -1,0 +1,687 @@
+{
+	"info": {
+		"_postman_id": "f1bb0302-1c1f-4ac7-a19e-1ff43f6c8641",
+		"name": "csgostore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26682412"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{csgostoreAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{csgostoreAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"steam_trade_link\": \"https://steamcommunity.com/tradeoffer/new/?partner=1602958605&token=gcb9Oys2\",\n    \"email\": \"example@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{csgostoreAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/user/transactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "(int) page number",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "5",
+									"description": "(int) items per page (max = 30)",
+									"disabled": true
+								},
+								{
+									"key": "product_name",
+									"value": "Nova",
+									"description": "(string) product name contains substring",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "buy",
+									"description": "(string) transaction has type",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "user_not_tradable",
+									"description": "(string) transaction has status",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Complete Registration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{csgostoreAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"steam_trade_link\": \"https://steamcommunity.com/tradeoffer/new/?partner=1602958605&token=gcb9Oys2\",\n    \"email\": \"example@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/user/complete-registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"complete-registration"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Market",
+			"item": [
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/market/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"market",
+								"products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "(int) page number",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "15",
+									"description": "(int) items per page (max = 30)",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "G3SG1 |",
+									"description": "(string) product name contains substring",
+									"disabled": true
+								},
+								{
+									"key": "price_min",
+									"value": "1.83",
+									"description": "(float) product price lower bound ",
+									"disabled": true
+								},
+								{
+									"key": "price_max",
+									"value": "1.84",
+									"description": "(float) product price upper bound",
+									"disabled": true
+								},
+								{
+									"key": "ids[]",
+									"value": "9158990",
+									"description": "(string[]) product `id` is one of the provided",
+									"disabled": true
+								},
+								{
+									"key": "types[]",
+									"value": "Shotgun",
+									"description": "(string[]) product `type` is one of the provided",
+									"disabled": true
+								},
+								{
+									"key": "exteriors[]",
+									"value": "Field-Tested",
+									"description": "(string[]) product `exterior` is one of the provided",
+									"disabled": true
+								},
+								{
+									"key": "rarities[]",
+									"value": "Mil-Spec Grade",
+									"description": "(string[]) product `rarity` is one of the provided",
+									"disabled": true
+								},
+								{
+									"key": "qualities[]",
+									"value": "Souvenir",
+									"description": "(string[]) product `quality` is one of the provided",
+									"disabled": true
+								},
+								{
+									"key": "weapons[]",
+									"value": "Nova",
+									"description": "(string[]) product `weapon` is one of the provided",
+									"disabled": true
+								},
+								{
+									"key": "stickers[]",
+									"value": "JOTA | Antwerp 2022",
+									"description": "(string[]) product has ALL provided stickers (by sticker name)",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Popular Products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{csgostoreAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/market/products/popular",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"market",
+								"products",
+								"popular"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "skinsback",
+			"item": [
+				{
+					"name": "Currencies",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"method\": \"currencies\",\n    \"shopid\": \"2177547c-94da-4162-8082-69539de7b760\",\n    \"sign\": \"4d0e8689d4a9bd4147912399e43b90776a73ad4a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://skinsback.com/api.php",
+							"protocol": "https",
+							"host": [
+								"skinsback",
+								"com"
+							],
+							"path": [
+								"api.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Balance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"method\": \"balance\",\n    \"shopid\": \"2177547c-94da-4162-8082-69539de7b760\",\n    \"sign\": \"05f87d5dcdf62d44302d91aa5ff82eafc129f427\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://skinsback.com/api.php",
+							"protocol": "https",
+							"host": [
+								"skinsback",
+								"com"
+							],
+							"path": [
+								"api.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Products",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"method\": \"market_search\",\n    \"shopid\": \"2177547c-94da-4162-8082-69539de7b760\",\n    \"names\": [\n        \"MAC-10 | Calf Skin (Well-Worn)\",\n        \"Nova | Windblown (Field-Tested)\"\n    ],\n    \"sign\": \"d45dff3eaf53b078621445344d9512e2da9720e2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://skinsback.com/api.php",
+							"protocol": "https",
+							"host": [
+								"skinsback",
+								"com"
+							],
+							"path": [
+								"api.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products (Extended)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"method\": \"market_pricelist\",\n    \"shopid\": \"2177547c-94da-4162-8082-69539de7b760\",\n    \"extended\": true,\n    \"sign\": \"2b7f2bc40b64421ebc7f8ab451d908d31825d784\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://skinsback.com/api.php",
+							"protocol": "https",
+							"host": [
+								"skinsback",
+								"com"
+							],
+							"path": [
+								"api.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products (Full & Extended)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"method\": \"market_pricelist\",\n    \"shopid\": \"2177547c-94da-4162-8082-69539de7b760\",\n    \"extended\": true,\n    \"full\": true,\n    \"sign\": \"c8a27ec41b1ba1b16fb10fa5783c56c013facf48\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://skinsback.com/api.php",
+							"protocol": "https",
+							"host": [
+								"skinsback",
+								"com"
+							],
+							"path": [
+								"api.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buy Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"method\": \"market_buy\",\n    \"shopid\": \"2177547c-94da-4162-8082-69539de7b760\",\n    \"partner\": \"1602958605\",\n    \"token\": \"gcb9Oys2\",\n    \"id\": \"9189309\",\n    \"max_price\": 0.08,\n    \"custom_id\": \"999999\",\n    \"sign\": \"5892324969b516e9e7f39a529e02b75d1870f654\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://skinsback.com/api.php",
+							"protocol": "https",
+							"host": [
+								"skinsback",
+								"com"
+							],
+							"path": [
+								"api.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order Status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"method\": \"market_buy\",\n    \"shopid\": \"2177547c-94da-4162-8082-69539de7b760\",\n    \"partner\": \"1602958605\",\n    \"token\": \"gcb9Oys2\",\n    \"id\": \"9189309\",\n    \"max_price\": 0.08,\n    \"custom_id\": \"999999\",\n    \"sign\": \"5892324969b516e9e7f39a529e02b75d1870f654\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://skinsback.com/api.php",
+							"protocol": "https",
+							"host": [
+								"skinsback",
+								"com"
+							],
+							"path": [
+								"api.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Failed Callback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"method\": \"callback_error_list\",\n    \"shopid\": \"2177547c-94da-4162-8082-69539de7b760\",\n    \"sign\": \"888428ca9a03de3595bd08bc935ff0fcdd91accb\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://skinsback.com/api.php",
+							"protocol": "https",
+							"host": [
+								"skinsback",
+								"com"
+							],
+							"path": [
+								"api.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{csgostoreAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_ids\": [\n        \"9799595\",\n        \"9799012\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Log In (from Browser)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/auth/steam/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"steam",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log Out (from Browser)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contact Us",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_email\": \"example@gmail.com\",\n    \"message\": \"Hello!\\nHow are you?\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/contact-us",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"contact-us"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "csgostoreAuthToken",
+			"value": "2|knykdWkQzKFdWx3zdDrEFnGWomCDDaweonD04Pg6bfaa19bf"
+		}
+	]
+}

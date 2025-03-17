@@ -1,0 +1,77 @@
+version: '3.9'
+
+services:
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/local/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      php:
+        condition: service_started
+
+  mariadb:
+    image: docker.io/bitnami/mariadb:11.1
+    ports:
+      - '127.0.0.1:3306:3306'
+    environment:
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+    networks:
+      - app-network
+    volumes:
+      - mariadb-data:/bitnami/mariadb
+    healthcheck:
+      test: ["CMD-SHELL", "exit 0"]
+      interval: 1s
+      timeout: 1s
+      retries: 30
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: csgostore_php
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+    command: [
+      "bash",
+      "-c",
+      "chown -R daemon:daemon /app/storage
+        && composer install
+        && php artisan migrate --force
+        && pm2 start ecosystem.config.cjs
+        && cron
+        && php-fpm
+        && tail -f /dev/null"
+    ]
+    volumes:
+      - './:/app'
+    networks:
+      - app-network
+    depends_on:
+      mariadb:
+        condition: service_healthy
+
+volumes:
+  mariadb-data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
