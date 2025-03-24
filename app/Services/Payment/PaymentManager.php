@@ -8,6 +8,7 @@ use App\Entity\DTO\Payment\PaymentCallbackPayload;
 use App\Entity\Events\PaymentProcessed;
 use App\Exceptions\Market\BuyProduct\BuyProductException;
 use App\Exceptions\Market\BuyProduct\Case\BuyProductExceptionCase;
+use App\Jobs\SendOrderAdminMailJob;
 use App\Jobs\SendSuccessTransactionMailJob;
 use App\Models\Enum\OrderStatus;
 use App\Models\Enum\PaymentStatus;
@@ -137,6 +138,7 @@ class PaymentManager
 
         $order->setStatus($result);
         $order->save();
+        SendOrderAdminMailJob::dispatch($order);
         $transactions = $order->getTransactions();
         $hasNullBuyId = !empty(array_filter($transactions, function ($transaction) {
             return $transaction['buy_id'] === null;

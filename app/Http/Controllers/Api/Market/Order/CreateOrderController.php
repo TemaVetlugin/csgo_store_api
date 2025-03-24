@@ -30,7 +30,7 @@ class CreateOrderController extends Controller
 
     public function __invoke(CreateOrderRequest $request): JsonResponse
     {
-//        $this->marketCacheManager->refreshCache();
+        $this->marketCacheManager->refreshCache();
 
         $authenticatedUser = $this->userProvider->getAuthenticated();
         $productIds = $request->getProductIds();

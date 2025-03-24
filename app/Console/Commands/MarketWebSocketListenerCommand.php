@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Jobs\SendFailedTransactionMailJob;
 use App\Jobs\SendSuccessTransactionMailJob;
+use App\Jobs\SendTransactionAdminMailJob;
 use App\Models\Enum\TransactionStatus;
 use App\Models\Transaction;
 use App\Repositories\User\TransactionRepository;
@@ -125,6 +126,7 @@ class MarketWebSocketListenerCommand extends Command
 
         if (in_array($transactionStatus, self::TRANSACTION_STATUSES_TO_NOTIFY_USERS_ABOUT_FAILED_TRANSACTIONS, true)) {
             SendFailedTransactionMailJob::dispatch($transaction->getId());
+            SendTransactionAdminMailJob::dispatch($transaction->getId());
         }
 
         if (in_array($transactionStatus, self::TRANSACTION_STATUSES_TO_NOTIFY_USERS_ABOUT_SUCCESS_TRANSACTIONS, true)) {

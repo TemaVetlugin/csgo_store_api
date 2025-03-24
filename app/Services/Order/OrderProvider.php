@@ -35,9 +35,13 @@ class OrderProvider
         ->setCountry($data['country'])
         ->setCountryIso($data['countryIso'])
         ->setCity($data['city'])
-        ->setAddress($data['address'])
-        ->setPhone($data['phone'])
-        ->setNote($data['notes']);
+        ->setAddress($data['address']);
+        if(isset($data['phone'])){
+            $order->setPhone($data['phone']);
+        }
+        if(isset($data['notes'])){
+            $order->setNote($data['notes']);
+        }
         return $order;
     }
 

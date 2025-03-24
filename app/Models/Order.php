@@ -182,7 +182,7 @@ class Order extends Model
 
     public function getPhone(): string
     {
-        return $this->phone;
+        return $this->phone??'';
     }
 
     public function setPhone(string $phone): static
