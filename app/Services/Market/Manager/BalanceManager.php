@@ -21,6 +21,7 @@ class BalanceManager
         $balanceAmount = $this->balanceProvider->getBalance($money->getCurrencyCode());
         $pendingOrdersTotalAmount = $this->orderProvider->getPendingOrdersTotalAmount();
 
-        return ($balanceAmount->getAmount() - $pendingOrdersTotalAmount->getAmount()) > $money->getAmount();
+        return ($balanceAmount->getAmount()) > $money->getAmount();
+//        return ($balanceAmount->getAmount() - $pendingOrdersTotalAmount->getAmount()) > $money->getAmount();
     }
 }
